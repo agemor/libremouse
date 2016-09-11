@@ -12,6 +12,8 @@ class VideoProcessor {
 private:
 	static const string ALGORITHM;
 
+	bool initialized = false;
+
 	VideoSource video;
 	Ptr<Tracker> tracker;
 
@@ -23,12 +25,14 @@ private:
 	int featureHeight;
 	bool featureSelected = false;
 
-	void drawBox(Mat &image, Rect2d &box, int thickness=4);
+	void drawBox(Mat &image, Rect2d &box, int thickness);
 
 public:
 	VideoProcessor();
 
 	int initialize();
+	bool isInitialized();
+
 	int process();
 
 	void setFeatureWidth(int width);

@@ -15,9 +15,15 @@ int VideoProcessor::initialize() {
 	if (tracker == NULL)
 		return 2;
 
+	initialized = true;
+
 }
 
-void VideoProcessor::drawBox(Mat &image, Rect2d &box, int thickness=4) {
+bool VideoProcessor::isInitialized() {
+	return initialized;
+}
+
+void VideoProcessor::drawBox(Mat &image, Rect2d &box, int thickness) {
 
 	LineIterator iteratorX(image, Point(box.x, box.y), Point(box.x + box.width, box.y), 8);
 	LineIterator iteratorY(image, Point(box.x, box.y), Point(box.x, box.y + box.height), 8);
@@ -64,11 +70,11 @@ int VideoProcessor::process() {
 		if (!tracked)
 			return 2;
 
-		drawBox(image, boundingBox);
+		drawBox(image, boundingBox, 4);
 	}
 
 	else {
-		drawBox(image, featureRegion);
+		drawBox(image, featureRegion, 4);
 	}
 
 	return 0;

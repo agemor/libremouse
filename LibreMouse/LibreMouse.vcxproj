@@ -19,10 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CursorUpdater.h" />
+    <ClInclude Include="VideoPanel.h" />
     <ClInclude Include="LibreMouse.h" />
+    <ClInclude Include="VideoProcessor.h" />
+    <ClInclude Include="VideoSource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CursorUpdater.cpp" />
+    <ClCompile Include="VideoPanel.cpp" />
     <ClCompile Include="LibreMouse.cpp" />
+    <ClCompile Include="VideoProcessor.cpp" />
+    <ClCompile Include="VideoSource.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FB7BE275-A398-4AB1-83B1-E590DF92E2A1}</ProjectGuid>
