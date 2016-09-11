@@ -15,6 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LibreMouse.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="LibreMouse.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
