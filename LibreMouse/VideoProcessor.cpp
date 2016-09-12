@@ -3,12 +3,10 @@
 const std::string VideoProcessor::ALGORITHM = "MEDIANFLOW";
 
 VideoProcessor::VideoProcessor() {
-	setFeatureWidth(80);
-	setFeatureHeight(80);
 }
 
 int VideoProcessor::initialize() {
-
+	
 	bool isOpened = video.open();
 	if (!isOpened)
 		return 1;
@@ -16,6 +14,9 @@ int VideoProcessor::initialize() {
 	tracker = cv::Tracker::create(ALGORITHM);
 	if (tracker == NULL)
 		return 2;
+
+	setFeatureWidth(100);
+	setFeatureHeight(100);
 
 	initialized = true;
 
@@ -28,32 +29,23 @@ bool VideoProcessor::isInitialized() {
 
 void VideoProcessor::drawBox(cv::Mat &image, cv::Rect2d &box, int thickness) {
 
-	cv::LineIterator iteratorX(image, cv::Point(box.x, box.y), cv::Point(box.x + box.width, box.y), 8);
-	cv::LineIterator iteratorY(image, cv::Point(box.x, box.y), cv::Point(box.x, box.y + box.height), 8);
+	int ht = thickness / 2;
 
-	for (int i = 0; i < iteratorX.count; i++, ++iteratorX) {
-		cv::Point point = iteratorX.pos();
-		for (int k = 0; k < 2; k++) {
-			point.y += box.height * k;
-			point.y -= thickness / 2;
-			for (int j = 0; j < thickness; j++) {
-				point.y++;
-				cv::Vec3b val = image.at<cv::Vec3b>(point);
-				image.at<cv::Vec3b>(point) = cv::Vec3b(255 - val[0], 255 - val[1], 255 - val[2]);
-			}
+	for (int x = box.x - ht; x < box.x + box.width + ht; x++) {
+		for (int y = box.y - ht; y < box.y + ht; y++) {
+			cv::Vec3b v1 = image.at<cv::Vec3b>(y, x);
+			cv::Vec3b v2 = image.at<cv::Vec3b>(y + box.height, x);
+			image.at<cv::Vec3b>(y, x) = cv::Vec3b(255 - v1[0], 255 - v1[1], 255 - v1[2]);
+			image.at<cv::Vec3b>(y + box.height, x) = cv::Vec3b(255 - v2[0], 255 - v2[1], 255 - v2[2]);
 		}
 	}
 
-	for (int i = 0; i < iteratorY.count; i++, ++iteratorY) {
-		cv::Point point = iteratorY.pos();
-		for (int k = 0; k < 2; k++) {
-			point.x += box.width * k;
-			point.x -= thickness / 2;
-			for (int j = 0; j < thickness; j++) {
-				point.x++;
-				cv::Vec3b val = image.at<cv::Vec3b>(point);
-				image.at<cv::Vec3b>(point) = cv::Vec3b(255 - val[0], 255 - val[1], 255 - val[2]);
-			}
+	for (int y = box.y + ht; y < box.y + box.height - ht; y++) {
+		for (int x = box.x - ht; x < box.x + ht; x++) {
+			cv::Vec3b v1 = image.at<cv::Vec3b>(y, x);
+			cv::Vec3b v2 = image.at<cv::Vec3b>(y, x + box.width);
+			image.at<cv::Vec3b>(y, x) = cv::Vec3b(255 - v1[0], 255 - v1[1], 255 - v1[2]);
+			image.at<cv::Vec3b>(y, x + box.width) = cv::Vec3b(255 - v2[0], 255 - v2[1], 255 - v2[2]);
 		}
 	}
 }
@@ -73,11 +65,11 @@ int VideoProcessor::process() {
 		if (!tracked)
 			return 2;
 
-		//drawBox(image, boundingBox, 4);
+		drawBox(image, boundingBox, 2);
 	}
 
 	else {
-		drawBox(image, featureRegion, 20);
+		drawBox(image, featureRegion, 4);
 	}
 
 	return 0;

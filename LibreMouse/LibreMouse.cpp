@@ -1,9 +1,13 @@
 #include "LibreMouse.h"
+#include <windows.h>
 
 
 IMPLEMENT_APP(LibreMouse);
 
 bool LibreMouse::OnInit() {
+
+	AllocConsole();
+	freopen("CONOUT$", "w", stdout);
 
 	wxInitAllImageHandlers();
 
