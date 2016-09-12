@@ -12,7 +12,7 @@ private:
 	wxBitmap image;
 	wxTimer timer;
 
-	wxBitmap convertToWxForm(Mat& image);
+	wxBitmap convertToWxForm(cv::Mat& image);
 
 	DECLARE_EVENT_TABLE()
 
@@ -25,7 +25,6 @@ public:
 	void setVideo(VideoProcessor &processor);
 	VideoProcessor getVideo();
 
-	void onPaint(wxPaintEvent &event);
 	void onTimer(wxTimerEvent &event);
 
 };

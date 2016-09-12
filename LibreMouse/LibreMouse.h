@@ -1,5 +1,6 @@
 #pragma once
 #include <wx/wx.h>
+#include <wx/msgdlg.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>

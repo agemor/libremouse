@@ -4,28 +4,25 @@
 
 #include "VideoSource.h"
 
-using namespace std;
-using namespace cv;
-
 class VideoProcessor {
 
 private:
-	static const string ALGORITHM;
+	static const std::string ALGORITHM;
 
 	bool initialized = false;
 
 	VideoSource video;
-	Ptr<Tracker> tracker;
+	cv::Ptr<cv::Tracker> tracker;
 
-	Mat frame, image;
-	Rect2d boundingBox;
+	cv::Mat frame, image;
+	cv::Rect2d boundingBox;
 
-	Rect2d featureRegion;
+	cv::Rect2d featureRegion;
 	int featureWidth;
 	int featureHeight;
 	bool featureSelected = false;
 
-	void drawBox(Mat &image, Rect2d &box, int thickness);
+	void drawBox(cv::Mat &image, cv::Rect2d &box, int thickness);
 
 public:
 	VideoProcessor();
@@ -43,6 +40,6 @@ public:
 	bool selectFeature();
 	void dropFeature();
 
-	Rect2d getBoundingBox();
-	Mat getImage();
+	cv::Rect2d getBoundingBox();
+	cv::Mat getImage();
 };

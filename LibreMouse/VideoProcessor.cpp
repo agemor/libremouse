@@ -1,8 +1,10 @@
 #include "VideoProcessor.h"
 
-const string VideoProcessor::ALGORITHM = "MEDIANFLOW";
+const std::string VideoProcessor::ALGORITHM = "MEDIANFLOW";
 
 VideoProcessor::VideoProcessor() {
+	setFeatureWidth(80);
+	setFeatureHeight(80);
 }
 
 int VideoProcessor::initialize() {
@@ -17,39 +19,40 @@ int VideoProcessor::initialize() {
 
 	initialized = true;
 
+	return 0;
 }
 
 bool VideoProcessor::isInitialized() {
 	return initialized;
 }
 
-void VideoProcessor::drawBox(Mat &image, Rect2d &box, int thickness) {
+void VideoProcessor::drawBox(cv::Mat &image, cv::Rect2d &box, int thickness) {
 
-	LineIterator iteratorX(image, Point(box.x, box.y), Point(box.x + box.width, box.y), 8);
-	LineIterator iteratorY(image, Point(box.x, box.y), Point(box.x, box.y + box.height), 8);
+	cv::LineIterator iteratorX(image, cv::Point(box.x, box.y), cv::Point(box.x + box.width, box.y), 8);
+	cv::LineIterator iteratorY(image, cv::Point(box.x, box.y), cv::Point(box.x, box.y + box.height), 8);
 
 	for (int i = 0; i < iteratorX.count; i++, ++iteratorX) {
-		Point point = iteratorX.pos();
+		cv::Point point = iteratorX.pos();
 		for (int k = 0; k < 2; k++) {
 			point.y += box.height * k;
 			point.y -= thickness / 2;
 			for (int j = 0; j < thickness; j++) {
 				point.y++;
-				Vec3b val = image.at<Vec3b>(point);
-				image.at<Vec3b>(point) = Vec3b(255 - val[0], 255 - val[1], 255 - val[2]);
+				cv::Vec3b val = image.at<cv::Vec3b>(point);
+				image.at<cv::Vec3b>(point) = cv::Vec3b(255 - val[0], 255 - val[1], 255 - val[2]);
 			}
 		}
 	}
 
 	for (int i = 0; i < iteratorY.count; i++, ++iteratorY) {
-		Point point = iteratorY.pos();
+		cv::Point point = iteratorY.pos();
 		for (int k = 0; k < 2; k++) {
 			point.x += box.width * k;
 			point.x -= thickness / 2;
 			for (int j = 0; j < thickness; j++) {
 				point.x++;
-				Vec3b val = image.at<Vec3b>(point);
-				image.at<Vec3b>(point) = Vec3b(255 - val[0], 255 - val[1], 255 - val[2]);
+				cv::Vec3b val = image.at<cv::Vec3b>(point);
+				image.at<cv::Vec3b>(point) = cv::Vec3b(255 - val[0], 255 - val[1], 255 - val[2]);
 			}
 		}
 	}
@@ -70,11 +73,11 @@ int VideoProcessor::process() {
 		if (!tracked)
 			return 2;
 
-		drawBox(image, boundingBox, 4);
+		//drawBox(image, boundingBox, 4);
 	}
 
 	else {
-		drawBox(image, featureRegion, 4);
+		drawBox(image, featureRegion, 20);
 	}
 
 	return 0;
@@ -83,7 +86,7 @@ int VideoProcessor::process() {
 bool VideoProcessor::selectFeature() {
 
 	tracker->clear();
-	tracker = Tracker::create(ALGORITHM);
+	tracker = cv::Tracker::create(ALGORITHM);
 
 	featureSelected = tracker->init(frame, featureRegion);
 	
@@ -114,6 +117,10 @@ int VideoProcessor::getFeatureHeight() {
 	return featureHeight;
 }
 
-Rect2d VideoProcessor::getBoundingBox() {
+cv::Rect2d VideoProcessor::getBoundingBox() {
 	return boundingBox;
+}
+
+cv::Mat VideoProcessor::getImage() {
+	return image;
 }

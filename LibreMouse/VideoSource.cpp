@@ -5,7 +5,6 @@ VideoSource::VideoSource()
 {
 }
 
-
 /**
  * Detect possible camera port and open it.
  */
