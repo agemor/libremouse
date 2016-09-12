@@ -5,8 +5,8 @@ IMPLEMENT_APP(LibreMouse);
 
 bool LibreMouse::OnInit() {
 
-	AllocConsole();
-	freopen("CONOUT$", "w", stdout);
+	//AllocConsole();
+	//freopen("CONOUT$", "w", stdout);
 
 	wxInitAllImageHandlers();
 
@@ -39,7 +39,7 @@ int LibreMouse::FilterEvent(wxEvent& event) {
 	if ((event.GetEventType() == wxEVT_KEY_DOWN) &&
 		(((wxKeyEvent&)event).GetKeyCode() == WXK_SPACE)) {
 		
-		bool rslt  = videoProcessor->selectFeature();
+		videoProcessor->selectFeature();
 
 		return true;
 	}

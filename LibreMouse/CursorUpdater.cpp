@@ -1,7 +1,6 @@
 #include "CursorUpdater.h"
 
 
-
 CursorUpdater::CursorUpdater()
 {
 }

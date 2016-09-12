@@ -18,7 +18,8 @@ void VideoPanel::onTimer(wxTimerEvent& event) {
 	if (!video->isInitialized())
 		return;
 
-	int rslt = video->process();
+	video->process();
+	video->getBoundingBox();
 
 	//	std::cout << video.featureSelected << std::endl;
 

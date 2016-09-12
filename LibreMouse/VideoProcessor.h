@@ -1,5 +1,4 @@
 #pragma once
-#include <opencv2/tracking.hpp>
 #include <string>
 
 #include "VideoSource.h"

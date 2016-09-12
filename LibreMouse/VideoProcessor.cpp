@@ -80,11 +80,6 @@ int VideoProcessor::process() {
 
 bool VideoProcessor::selectFeature() {
 
-	//tracker->clear();
-	//tracker = cv::Tracker::create(ALGORITHM);
-
-	//featureSelected = tracker->init(frame, featureRegion);
-	
 	tracker.init(featureRegion, frame);
 	featureSelected = true;
 	return featureSelected;

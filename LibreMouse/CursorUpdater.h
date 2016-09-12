@@ -1,6 +1,5 @@
 #pragma once
-class CursorUpdater
-{
+class CursorUpdater {
 public:
 	CursorUpdater();
 	~CursorUpdater();
