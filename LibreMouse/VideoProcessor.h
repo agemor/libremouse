@@ -3,6 +3,8 @@
 #include <string>
 
 #include "VideoSource.h"
+#include "kcf/kcftracker.hpp"
+
 
 class VideoProcessor {
 
@@ -12,20 +14,21 @@ private:
 	bool initialized = false;
 
 	VideoSource video;
-	cv::Ptr<cv::Tracker> tracker;
+	KCFTracker tracker;
 
 	cv::Mat frame, image;
-	cv::Rect2d boundingBox;
+	cv::Rect boundingBox;
 
-	cv::Rect2d featureRegion;
+	cv::Rect featureRegion;
 	int featureWidth;
 	int featureHeight;
-	bool featureSelected = false;
 
-	void drawBox(cv::Mat &image, cv::Rect2d &box, int thickness);
+	void drawBox(cv::Mat& image, cv::Rect& box, int thickness);
 
 public:
 	VideoProcessor();
+	int kuru = 0;
+	bool featureSelected = false;
 
 	int initialize();
 	bool isInitialized();
@@ -40,6 +43,6 @@ public:
 	bool selectFeature();
 	void dropFeature();
 
-	cv::Rect2d getBoundingBox();
+	cv::Rect getBoundingBox();
 	cv::Mat getImage();
 };

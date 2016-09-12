@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\kcf">
+      <UniqueIdentifier>{4d93042d-4202-4c49-b340-7f5c5eb4452c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LibreMouse.h">
@@ -30,6 +33,24 @@
     <ClInclude Include="CursorUpdater.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="kcf\ffttools.hpp">
+      <Filter>소스 파일\kcf</Filter>
+    </ClInclude>
+    <ClInclude Include="kcf\fhog.hpp">
+      <Filter>소스 파일\kcf</Filter>
+    </ClInclude>
+    <ClInclude Include="kcf\kcftracker.hpp">
+      <Filter>소스 파일\kcf</Filter>
+    </ClInclude>
+    <ClInclude Include="kcf\labdata.hpp">
+      <Filter>소스 파일\kcf</Filter>
+    </ClInclude>
+    <ClInclude Include="kcf\recttools.hpp">
+      <Filter>소스 파일\kcf</Filter>
+    </ClInclude>
+    <ClInclude Include="kcf\tracker.h">
+      <Filter>소스 파일\kcf</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibreMouse.cpp">
@@ -46,6 +67,12 @@
     </ClCompile>
     <ClCompile Include="CursorUpdater.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="kcf\fhog.cpp">
+      <Filter>소스 파일\kcf</Filter>
+    </ClCompile>
+    <ClCompile Include="kcf\kcftracker.cpp">
+      <Filter>소스 파일\kcf</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

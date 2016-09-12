@@ -10,20 +10,23 @@ VideoPanel::VideoPanel(wxFrame* parent) : wxPanel(parent), timer(this, TIMER_ID)
 	timer.Start(1000 / 36);
 }
 
-void VideoPanel::onTimer(wxTimerEvent &event) {
+void VideoPanel::onTimer(wxTimerEvent& event) {
 
 	if (!videoSet)
 		return;
 
-	if (!video.isInitialized())
+	if (!video->isInitialized())
 		return;
 
-	video.process();
-	image = convertToWxForm(video.getImage());
+	int rslt = video->process();
+
+	//	std::cout << video.featureSelected << std::endl;
+
+	image = convertToWxForm(video->getImage());
 	paint();
 }
 
-wxBitmap VideoPanel::convertToWxForm(cv::Mat &image) {
+wxBitmap VideoPanel::convertToWxForm(cv::Mat& image) {
 	cv::Mat rgbMat;
 	if (image.channels() == 3)
 		cv::cvtColor(image, rgbMat, CV_BGR2RGB);
@@ -37,15 +40,15 @@ void VideoPanel::paint() {
 	render(dc);
 }
 
-void VideoPanel::render(wxDC &dc) {
+void VideoPanel::render(wxDC& dc) {
 	dc.DrawBitmap(image, 0, 0, false);
 }
 
-void VideoPanel::setVideo(VideoProcessor &processor) {
+void VideoPanel::setVideo(VideoProcessor* processor) {
 	video = processor;
 	videoSet = true;
 }
 
-VideoProcessor VideoPanel::getVideo() {
+VideoProcessor* VideoPanel::getVideo() {
 	return video;
 }

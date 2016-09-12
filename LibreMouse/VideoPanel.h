@@ -6,7 +6,7 @@ class VideoPanel : public wxPanel {
 
 private:
 
-	VideoProcessor video;
+	VideoProcessor* video;
 	bool videoSet = false;
 
 	wxBitmap image;
@@ -22,10 +22,9 @@ public:
 	void paint();
 	void render(wxDC &dc);
 
-	void setVideo(VideoProcessor &processor);
-	VideoProcessor getVideo();
+	void setVideo(VideoProcessor* processor);
+	VideoProcessor* getVideo();
 
 	void onTimer(wxTimerEvent &event);
 
 };
-

@@ -13,8 +13,11 @@ private:
 	wxFrame *frame;
 	VideoPanel *videoPanel;
 
+	VideoProcessor *videoProcessor;
+
 public:
 	virtual bool OnInit();
+	virtual int FilterEvent(wxEvent& event);
 };
 
 DECLARE_APP(LibreMouse);

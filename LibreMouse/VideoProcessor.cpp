@@ -3,6 +3,7 @@
 const std::string VideoProcessor::ALGORITHM = "MEDIANFLOW";
 
 VideoProcessor::VideoProcessor() {
+
 }
 
 int VideoProcessor::initialize() {
@@ -11,9 +12,13 @@ int VideoProcessor::initialize() {
 	if (!isOpened)
 		return 1;
 
-	tracker = cv::Tracker::create(ALGORITHM);
-	if (tracker == NULL)
-		return 2;
+	bool HOG = true;
+	bool FIXEDWINDOW = false;
+	bool MULTISCALE = true;
+	bool SILENT = true;
+	bool LAB = false;
+
+	tracker = KCFTracker(HOG, FIXEDWINDOW, MULTISCALE, LAB);
 
 	setFeatureWidth(100);
 	setFeatureHeight(100);
@@ -27,7 +32,7 @@ bool VideoProcessor::isInitialized() {
 	return initialized;
 }
 
-void VideoProcessor::drawBox(cv::Mat &image, cv::Rect2d &box, int thickness) {
+void VideoProcessor::drawBox(cv::Mat &image, cv::Rect &box, int thickness) {
 
 	int ht = thickness / 2;
 
@@ -61,15 +66,13 @@ int VideoProcessor::process() {
 	// In tracking mode
 	if (featureSelected) {
 
-		bool tracked = tracker->update(frame, boundingBox);
-		if (!tracked)
-			return 2;
+		boundingBox = tracker.update(frame);
 
 		drawBox(image, boundingBox, 2);
 	}
 
 	else {
-		drawBox(image, featureRegion, 4);
+		drawBox(image, featureRegion, 2);
 	}
 
 	return 0;
@@ -77,11 +80,13 @@ int VideoProcessor::process() {
 
 bool VideoProcessor::selectFeature() {
 
-	tracker->clear();
-	tracker = cv::Tracker::create(ALGORITHM);
+	//tracker->clear();
+	//tracker = cv::Tracker::create(ALGORITHM);
 
-	featureSelected = tracker->init(frame, featureRegion);
+	//featureSelected = tracker->init(frame, featureRegion);
 	
+	tracker.init(featureRegion, frame);
+	featureSelected = true;
 	return featureSelected;
 }
 
@@ -109,7 +114,7 @@ int VideoProcessor::getFeatureHeight() {
 	return featureHeight;
 }
 
-cv::Rect2d VideoProcessor::getBoundingBox() {
+cv::Rect VideoProcessor::getBoundingBox() {
 	return boundingBox;
 }
 

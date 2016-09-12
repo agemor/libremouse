@@ -20,6 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CursorUpdater.h" />
+    <ClInclude Include="kcf\ffttools.hpp" />
+    <ClInclude Include="kcf\fhog.hpp" />
+    <ClInclude Include="kcf\kcftracker.hpp" />
+    <ClInclude Include="kcf\labdata.hpp" />
+    <ClInclude Include="kcf\recttools.hpp" />
+    <ClInclude Include="kcf\tracker.h" />
     <ClInclude Include="VideoPanel.h" />
     <ClInclude Include="LibreMouse.h" />
     <ClInclude Include="VideoProcessor.h" />
@@ -27,6 +33,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CursorUpdater.cpp" />
+    <ClCompile Include="kcf\fhog.cpp" />
+    <ClCompile Include="kcf\kcftracker.cpp" />
     <ClCompile Include="VideoPanel.cpp" />
     <ClCompile Include="LibreMouse.cpp" />
     <ClCompile Include="VideoProcessor.cpp" />
