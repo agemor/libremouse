@@ -1,12 +1,15 @@
 #pragma once
 #include <wx/wx.h>
-#include "VideoProcessor.h";
+#include "VideoProcessor.h"
+#include "CursorUpdater.h"
 
 class VideoPanel : public wxPanel {
 
 private:
 
 	VideoProcessor* video;
+	CursorUpdater cursorUpdater;
+
 	bool videoSet = false;
 
 	wxBitmap image;

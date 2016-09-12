@@ -19,7 +19,8 @@ void VideoPanel::onTimer(wxTimerEvent& event) {
 		return;
 
 	video->process();
-	video->getBoundingBox();
+	cv::Rect box = video->getBoundingBox();
+	cursorUpdater.addToPath(Point2D(box.x, box.y));
 
 	//	std::cout << video.featureSelected << std::endl;
 
