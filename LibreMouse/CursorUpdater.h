@@ -2,14 +2,17 @@
 #include "SynchronizedQueue.h"
 #include <wx/mousestate.h>
 
-struct Point2D {
+class Point2D {
+
+public:
 	int x;
 	int y;
+
 	Point2D(int x_, int y_) {
 		x = x_;
 		y = y_;
 	}
-} CursorPosition;
+};
 
 class CursorUpdater {
 private:
@@ -26,11 +29,11 @@ private:
 	double prevSpeedX = 0, prevSpeedY = 0;
 	double accX = 0, accY = 0;
 
-	void update();
 public:
 	CursorUpdater();
 
 	void addToPath(Point2D step);
+	void update();
 	void start();
 	void stop();
 };

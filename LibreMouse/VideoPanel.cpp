@@ -21,7 +21,6 @@ void VideoPanel::onTimer(wxTimerEvent& event) {
 	video->process();
 	cv::Rect box = video->getBoundingBox();
 	cursorUpdater.addToPath(Point2D(box.x, box.y));
-
 	//	std::cout << video.featureSelected << std::endl;
 
 	image = convertToWxForm(video->getImage());

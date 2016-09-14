@@ -1,13 +1,12 @@
 #include "CursorUpdater.h"
 
-
 CursorUpdater::CursorUpdater() {
 }
 
 void CursorUpdater::update() {
 
-	CursorPosition target; = Point2D(0, 0);
-	CursorPosition current; = Point2D(0, 0);
+	Point2D target(0, 0);
+	Point2D current(0, 0);
 
 	bool moving = false;
 
@@ -45,7 +44,6 @@ void CursorUpdater::update() {
 			}
 		}
 	}
-
 }
 
 void CursorUpdater::addToPath(Point2D step) {
@@ -84,7 +82,7 @@ void CursorUpdater::start() {
 		prevY = cursorY;
 
 		running = true;
-		updater = std::thread(&update);
+		updater = std::thread([this] { this->update(); });
 	}
 }
 void CursorUpdater::stop() {

@@ -36,7 +36,6 @@
     <ClCompile Include="CursorUpdater.cpp" />
     <ClCompile Include="kcf\fhog.cpp" />
     <ClCompile Include="kcf\kcftracker.cpp" />
-    <ClCompile Include="SynchronizedQueue.cpp" />
     <ClCompile Include="VideoPanel.cpp" />
     <ClCompile Include="LibreMouse.cpp" />
     <ClCompile Include="VideoProcessor.cpp" />
@@ -115,7 +114,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>D:\Libraries\wxWidgets-3.1.0\lib\vc_dll\mswu;D:\Libraries\wxWidgets-3.1.0\include;D:\Libraries\OpenCV-3.1\custom-build\install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__WXMSW__;WXUSINGDLL;wxUSE_GUI=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__WXMSW__;WXUSINGDLL;wxUSE_GUI=1;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
