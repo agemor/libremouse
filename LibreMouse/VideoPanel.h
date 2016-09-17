@@ -8,7 +8,7 @@ class VideoPanel : public wxPanel {
 private:
 
 	VideoProcessor* video;
-	CursorUpdater cursorUpdater;
+	CursorUpdater* cursorUpdater;
 
 	bool videoSet = false;
 

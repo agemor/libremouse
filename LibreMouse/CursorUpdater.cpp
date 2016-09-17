@@ -1,6 +1,7 @@
 #include "CursorUpdater.h"
-
-CursorUpdater::CursorUpdater() {
+#include <iostream>
+CursorUpdater::CursorUpdater(wxFrame* _frame) {
+	frame = _frame;
 }
 
 void CursorUpdater::update() {
@@ -17,19 +18,25 @@ void CursorUpdater::update() {
 		if (moving) {
 
 			double distance = sqrt(pow(target.x - current.x, 2) + pow(target.y - current.y, 2));
-
-			if (distance < 1) {
+			if (distance < 5) {
 				if (pathQueue.size() > 0) {
 					// update target and current
 					target = pathQueue.pop();
-					mouseState.GetPosition(&current.x, &current.y);
+					wxGetMousePosition(&current.x, &current.y);
+
+					//mouseState.GetPosition(&current.x, &current.y);
+					//frame->GetMous
 				} else {
 					moving = false;
 				}
 			} else {
 				current.x += 0.3f * (target.x - current.x);
 				current.y += 0.3f * (target.y - current.y);
-				mouseState.SetPosition(wxPoint(current.x, current.y));
+				//std::cout << current.x << "/"  << current.y<< std::endl;
+
+				//frame->WarpPointer(current.x, current.y);
+
+				//mouseState.SetPosition(wxPoint(current.x, current.y));
 			}
 		}
 
@@ -37,12 +44,17 @@ void CursorUpdater::update() {
 			if (pathQueue.size() > 0) {
 				// update target and current
 				target = pathQueue.pop();
-				mouseState.GetPosition(&current.x, &current.y);
+				wxGetMousePosition(&current.x, &current.y);
+
+				//mouseState.GetPosition(&current.x, &current.y);
 				moving = true;
+
 			} else {
 				std::this_thread::yield();
 			}
 		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
 	}
 }
 
@@ -54,18 +66,21 @@ void CursorUpdater::addToPath(Point2D step) {
 	speedY = step.y - prevY;
 	prevX = step.x;
 	prevY = step.y;
-	accX = speedX - prevSpeedX;
-	accY = speedY - prevSpeedY;
+	accX = (speedX - prevSpeedX)*10;// *150;
+	accY = (speedY - prevSpeedY)*10;// *220;
 
 	double force = sqrt(accX * accX + accY * accY);
+	std::cout << force << std::endl;
 
 	if (force > 35 && force < 5000) {
+		std::cout << force << std::endl;
 
 		int cursorX, cursorY;
-		mouseState.GetPosition(&cursorX, &cursorY);
+		wxGetMousePosition(&cursorX, &cursorY);
+		//mouseState.GetPosition(&cursorX, &cursorY);
 
-		cursorX -= accX;
-		cursorY -= accY;
+		cursorX -= accX / 10;
+		cursorY -= accY / 10;
 
 		pathQueue.push(Point2D(cursorX, cursorY));
 	}
@@ -76,7 +91,9 @@ void CursorUpdater::start() {
 
 		// Init cursor prev pos
 		int cursorX, cursorY;
-		mouseState.GetPosition(&cursorX, &cursorY);
+		wxGetMousePosition(&cursorX, &cursorY);
+
+		//mouseState.GetPosition(&cursorX, &cursorY);
 
 		prevX = cursorX;
 		prevY = cursorY;

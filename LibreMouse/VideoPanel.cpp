@@ -8,6 +8,7 @@ END_EVENT_TABLE()
 
 VideoPanel::VideoPanel(wxFrame* parent) : wxPanel(parent), timer(this, TIMER_ID) {
 	timer.Start(1000 / 36);
+	cursorUpdater = new CursorUpdater(parent);
 }
 
 void VideoPanel::onTimer(wxTimerEvent& event) {
@@ -18,9 +19,16 @@ void VideoPanel::onTimer(wxTimerEvent& event) {
 	if (!video->isInitialized())
 		return;
 
+	if (video->featureSelected) {
+		cursorUpdater->start();
+	}
+	else {
+		cursorUpdater->stop();
+	}
+
 	video->process();
 	cv::Rect box = video->getBoundingBox();
-	cursorUpdater.addToPath(Point2D(box.x, box.y));
+	cursorUpdater->addToPath(Point2D(box.x, box.y));
 	//	std::cout << video.featureSelected << std::endl;
 
 	image = convertToWxForm(video->getImage());

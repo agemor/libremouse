@@ -5,8 +5,8 @@ IMPLEMENT_APP(LibreMouse);
 
 bool LibreMouse::OnInit() {
 
-	//AllocConsole();
-	//freopen("CONOUT$", "w", stdout);
+	AllocConsole();
+	freopen("CONOUT$", "w", stdout);
 
 	wxInitAllImageHandlers();
 
@@ -23,6 +23,7 @@ bool LibreMouse::OnInit() {
 
 		return true;
 	}
+	
 
 	videoPanel = new VideoPanel(frame);
 	videoPanel->setVideo(videoProcessor);

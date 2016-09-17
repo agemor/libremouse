@@ -1,6 +1,7 @@
 #pragma once
 #include "SynchronizedQueue.h"
-#include <wx/mousestate.h>
+#include <wx/wx.h>
+
 
 class Point2D {
 
@@ -22,7 +23,7 @@ private:
 	SynchronizedQueue<Point2D> pathQueue;
 
 	std::thread updater;
-	bool running = false;
+	wxFrame* frame;
 
 	double prevX = 0, prevY = 0;
 	double speedX = 0, speedY = 0;
@@ -30,8 +31,9 @@ private:
 	double accX = 0, accY = 0;
 
 public:
-	CursorUpdater();
+	bool running = false;
 
+	CursorUpdater(wxFrame* _frame);
 	void addToPath(Point2D step);
 	void update();
 	void start();
