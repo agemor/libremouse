@@ -1,42 +1,60 @@
 #include "CursorUpdater.h"
 #include <iostream>
+#include <windows.h>
+
+
+double min(double a, double b) {
+	return (a < b ? a : b);
+}
+
 CursorUpdater::CursorUpdater(wxFrame* _frame) {
 	frame = _frame;
+}
+
+void CursorUpdater::getCursorPosition(Point2D &point) {
+	int cursorX, cursorY;
+	wxGetMousePosition(&cursorX, &cursorY);
+	point.x = cursorX;
+	point.y = cursorY;
+}
+
+void CursorUpdater::setCursorPosition(Point2D &point) {
+	SetCursorPos(point.x, point.y);
 }
 
 void CursorUpdater::update() {
 	
 	Point2D target(0, 0);
-	Point2I current(0, 0);
+	Point2D current(0, 0);
 
 	bool moving = false;
+
+	double distance = 100000;
+	double prevDistance = 0;
 
 	while (true) {
 
 		if (!running) break;
-
+		
 		if (moving) {
+			prevDistance = distance;
+			distance = sqrt(pow(target.x - current.x, 2) + pow(target.y - current.y, 2));
+			////double distance = abs(target.x - current.x) + abs(target.y - current.y);
 
-			double distance = sqrt(pow(target.x - current.x, 2) + pow(target.y - current.y, 2));
-			if (distance < 5) {
+			if (distance >= prevDistance || distance < 1) {
 				if (pathQueue.size() > 0) {
-					// update target and current
 					target = pathQueue.pop();
-					wxGetMousePosition(&current.x, &current.y);
-
-					//mouseState.GetPosition(&current.x, &current.y);
-					//frame->GetMous
+					getCursorPosition(current);
+					distance = 100000;
 				} else {
 					moving = false;
 				}
 			} else {
 				current.x += 0.3f * (target.x - current.x);
 				current.y += 0.3f * (target.y - current.y);
-				//std::cout << current.x << "/"  << current.y<< std::endl;
+				//::cout << current.x << "/" << current.y << std::endl;
 
-				//frame->WarpPointer(current.x, current.y);
-
-				//mouseState.SetPosition(wxPoint(current.x, current.y));
+				setCursorPosition(current);
 			}
 		}
 
@@ -44,17 +62,18 @@ void CursorUpdater::update() {
 			if (pathQueue.size() > 0) {
 				// update target and current
 				target = pathQueue.pop();
-				wxGetMousePosition(&current.x, &current.y);
-
-				//mouseState.GetPosition(&current.x, &current.y);
+				getCursorPosition(current);
+				distance = 100000;
 				moving = true;
 
 			} else {
-				std::this_thread::yield();
+				//std::this_thread::yield();
 			}
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
+		//std::cout << distance << std::endl;
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
 }
 
@@ -71,33 +90,32 @@ void CursorUpdater::addToPath(Point2D step) {
 	speedY = step.y - prevY;
 	prevX = step.x;
 	prevY = step.y;
-	accX = (speedX - prevSpeedX)*10;// *150;
-	accY = (speedY - prevSpeedY)*10;// *220;
+	float sx = (prevSpeedX + speedX) / 2;
+	float sy = (prevSpeedY + speedY) / 2;
 
-	double force = sqrt(accX * accX + accY * accY);
+	//sx = min(pow(sx, 2), 6) * (sx > 0 ? 1 : -1);
+	//sy = min(pow(sy, 2), 6) * (sy > 0 ? 1 : -1);
 
-	if (abs(speedX) + abs(speedY) > 0) {
+	sx = 300 * tanh(pow(sx / 1.5, 2) / 30) * (sx > 0 ? 1 : -1);
+	sy = 300 * tanh(pow(sy / 1.5, 2) / 18) * (sy > 0 ? 1 : -1);
 
-		std::cout << speedX << "/" << speedY << std::endl;
-	}
-	if (force > 35 && force < 5000) {
-		//std::cout << force << std::endl;
+	double force = abs(sx) + abs(sy);
+	if (force > 0) {
+		std::cout << sx << std::endl;
 
-		int cursorX, cursorY;
-		wxGetMousePosition(&cursorX, &cursorY);
-		//mouseState.GetPosition(&cursorX, &cursorY);
+		Point2D cursorPosition = Point2D();
+		getCursorPosition(cursorPosition);
 
-		cursorX -= accX / 10;
-		cursorY -= accY / 10;
+		cursorPosition.x -= -sx;
+		cursorPosition.y -= -sy;
 
-		pathQueue.push(Point2D(cursorX, cursorY));
+		pathQueue.push(cursorPosition);
 	}
 }
 
 void CursorUpdater::start() {
 	if (!running) {
 
-		std::cout << prevX << "/" << prevY << std::endl;
 		running = true;
 		updater = std::thread([this] { this->update(); });
 	}

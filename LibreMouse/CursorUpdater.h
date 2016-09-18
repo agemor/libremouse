@@ -13,17 +13,10 @@ public:
 		x = x_;
 		y = y_;
 	}
-};
 
-class Point2I {
-
-public:
-	int x;
-	int y;
-
-	Point2I(int x_, int y_) {
-		x = x_;
-		y = y_;
+	Point2D() {
+		x = 0;
+		y = 0;
 	}
 };
 
@@ -41,6 +34,9 @@ private:
 	double speedX = 0, speedY = 0;
 	double prevSpeedX = 0, prevSpeedY = 0;
 	double accX = 0, accY = 0;
+
+	void getCursorPosition(Point2D &point);
+	void setCursorPosition(Point2D &point);
 
 public:
 	bool running = false;
