@@ -31,9 +31,22 @@ bool VideoProcessor::isInitialized() {
 	return initialized;
 }
 
-void VideoProcessor::drawBox(cv::Mat &image, cv::Rect &box, int thickness) {
+void VideoProcessor::drawBox(cv::Mat &image, cv::Rect box, int thickness) {
 
 	int ht = thickness / 2;
+
+	if (image.rows <= box.y + box.height + ht) {
+		if (box.y + ht > image.rows)
+			return;
+		box.height = image.rows - box.y - ht;
+	}
+
+	if (box.y < ht) {
+		if (box.y + box.height < 0)
+			return;
+		box.height += box.y - ht;
+		box.y = ht;
+	}
 
 	for (int x = box.x - ht; x < box.x + box.width + ht; x++) {
 		for (int y = box.y - ht; y < box.y + ht; y++) {

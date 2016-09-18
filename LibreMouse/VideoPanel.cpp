@@ -7,7 +7,7 @@ EVT_TIMER(TIMER_ID, VideoPanel::onTimer)
 END_EVENT_TABLE()
 
 VideoPanel::VideoPanel(wxFrame* parent) : wxPanel(parent), timer(this, TIMER_ID) {
-	timer.Start(1000 / 36);
+	timer.Start(1000 / 40);
 	cursorUpdater = new CursorUpdater(parent);
 }
 

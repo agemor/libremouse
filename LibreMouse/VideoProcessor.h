@@ -21,7 +21,7 @@ private:
 	int featureWidth;
 	int featureHeight;
 
-	void drawBox(cv::Mat& image, cv::Rect& box, int thickness);
+	void drawBox(cv::Mat& image, cv::Rect box, int thickness);
 
 public:
 	VideoProcessor();
