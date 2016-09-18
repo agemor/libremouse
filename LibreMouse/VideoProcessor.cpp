@@ -1,8 +1,6 @@
 #include "VideoProcessor.h"
-#include <iostream>
 
 VideoProcessor::VideoProcessor() {
-
 }
 
 int VideoProcessor::initialize() {
@@ -75,16 +73,13 @@ int VideoProcessor::process() {
 	flip(video.getFrame(), frame, 1);
 	frame.copyTo(image);
 
-	// In tracking mode
 	if (featureSelected) {
 		boundingBox = tracker.update(frame);
 		drawBox(image, (cv::Rect) boundingBox, 2);
 	}
-
 	else {
 		drawBox(image, featureRegion, 2);
 	}
-
 	return 0;
 }
 

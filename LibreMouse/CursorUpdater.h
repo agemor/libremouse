@@ -2,9 +2,7 @@
 #include "SynchronizedQueue.h"
 #include <wx/wx.h>
 
-
 class Point2D {
-
 public:
 	double x;
 	double y;
@@ -13,7 +11,6 @@ public:
 		x = x_;
 		y = y_;
 	}
-
 	Point2D() {
 		x = 0;
 		y = 0;

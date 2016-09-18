@@ -113,14 +113,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Libraries\wxWidgets-3.1.0\lib\vc_dll\mswu;D:\Libraries\wxWidgets-3.1.0\include;D:\Libraries\OpenCV-3.1\custom-build\install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__WXMSW__;WXUSINGDLL;wxUSE_GUI=1;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Libraries\TBB-2017\include;D:\Libraries\wxWidgets-3.1.0\lib\vc_dll\mswu;D:\Libraries\wxWidgets-3.1.0\include;D:\Libraries\OpenCV-3.1\custom-build\install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__WXMSW__;WXUSINGDLL;wxUSE_GUI=1;_CRT_SECURE_NO_WARNINGS;HAVE_TBB=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>D:\Libraries\wxWidgets-3.1.0\lib\vc_dll;D:\Libraries\OpenCV-3.1\custom-build\install\x86\vc14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_world310.lib;opencv_tracking310.lib;wxbase31u.lib;wxmsw31u_core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Libraries\TBB-2017\lib\ia32\vc14;D:\Libraries\wxWidgets-3.1.0\lib\vc_dll;D:\Libraries\OpenCV-3.1\custom-build\install\x86\vc14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world310.lib;opencv_tracking310.lib;wxbase31u.lib;wxmsw31u_core.lib;tbb.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
