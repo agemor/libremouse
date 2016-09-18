@@ -23,7 +23,7 @@ void CursorUpdater::setCursorPosition(Point2D &point) {
 }
 
 void CursorUpdater::update() {
-	
+
 	Point2D target(0, 0);
 	Point2D current(0, 0);
 
@@ -44,10 +44,12 @@ void CursorUpdater::update() {
 					target = pathQueue.pop();
 					getCursorPosition(current);
 					distance = INFINITY;
-				} else {
+				}
+				else {
 					moving = false;
 				}
-			} else {
+			}
+			else {
 				current.x += 0.28f * (target.x - current.x);
 				current.y += 0.28f * (target.y - current.y);
 				setCursorPosition(current);

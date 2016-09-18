@@ -2,6 +2,7 @@
 #include <string>
 
 #include "VideoSource.h"
+#include "MouthMonitor.h"
 #include "kcf/kcftracker.hpp"
 
 
@@ -13,6 +14,7 @@ private:
 
 	VideoSource video;
 	KCFTracker tracker;
+	MouthMonitor mouthMonitor;
 
 	cv::Mat frame, image;
 	cv::Rect2f boundingBox;

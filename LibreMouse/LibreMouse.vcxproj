@@ -26,6 +26,7 @@
     <ClInclude Include="kcf\labdata.hpp" />
     <ClInclude Include="kcf\recttools.hpp" />
     <ClInclude Include="kcf\tracker.h" />
+    <ClInclude Include="MouthMonitor.h" />
     <ClInclude Include="SynchronizedQueue.h" />
     <ClInclude Include="VideoPanel.h" />
     <ClInclude Include="LibreMouse.h" />
@@ -36,6 +37,7 @@
     <ClCompile Include="CursorUpdater.cpp" />
     <ClCompile Include="kcf\fhog.cpp" />
     <ClCompile Include="kcf\kcftracker.cpp" />
+    <ClCompile Include="MouthMonitor.cpp" />
     <ClCompile Include="VideoPanel.cpp" />
     <ClCompile Include="LibreMouse.cpp" />
     <ClCompile Include="VideoProcessor.cpp" />

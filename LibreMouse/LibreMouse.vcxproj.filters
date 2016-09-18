@@ -54,6 +54,9 @@
     <ClInclude Include="SynchronizedQueue.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="MouthMonitor.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibreMouse.cpp">
@@ -76,6 +79,9 @@
     </ClCompile>
     <ClCompile Include="kcf\kcftracker.cpp">
       <Filter>소스 파일\kcf</Filter>
+    </ClCompile>
+    <ClCompile Include="MouthMonitor.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

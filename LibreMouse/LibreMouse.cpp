@@ -23,15 +23,12 @@ bool LibreMouse::OnInit() {
 
 		return true;
 	}
-	
 
 	videoPanel = new VideoPanel(frame);
 	videoPanel->setVideo(videoProcessor);
 
-
 	//std::cout << &(videoPanel->getVideo()).kuru << std::endl;
 	//std::cout << &videoProcessor.kuru << std::endl;
-
 
 	return true;
 }

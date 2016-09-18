@@ -4,7 +4,7 @@ VideoProcessor::VideoProcessor() {
 }
 
 int VideoProcessor::initialize() {
-	
+
 	bool isOpened = video.open();
 	if (!isOpened)
 		return 1;
@@ -17,8 +17,8 @@ int VideoProcessor::initialize() {
 
 	tracker = KCFTracker(HOG, FIXEDWINDOW, MULTISCALE, LAB);
 
-	setFeatureWidth(100);
-	setFeatureHeight(100);
+	setFeatureWidth(120);
+	setFeatureHeight(120);
 
 	initialized = true;
 
@@ -75,6 +75,7 @@ int VideoProcessor::process() {
 
 	if (featureSelected) {
 		boundingBox = tracker.update(frame);
+		mouthMonitor.update(frame(boundingBox));
 		drawBox(image, (cv::Rect) boundingBox, 2);
 	}
 	else {

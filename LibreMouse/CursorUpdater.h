@@ -19,9 +19,9 @@ public:
 
 class CursorUpdater {
 private:
-	
+
 	wxMouseState mouseState = wxMouseState();
-	
+
 	SynchronizedQueue<Point2D> pathQueue;
 
 	std::thread updater;
