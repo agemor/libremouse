@@ -6,10 +6,22 @@
 class Point2D {
 
 public:
+	double x;
+	double y;
+
+	Point2D(double x_, double y_) {
+		x = x_;
+		y = y_;
+	}
+};
+
+class Point2I {
+
+public:
 	int x;
 	int y;
 
-	Point2D(int x_, int y_) {
+	Point2I(int x_, int y_) {
 		x = x_;
 		y = y_;
 	}

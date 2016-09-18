@@ -8,7 +8,6 @@
 class VideoProcessor {
 
 private:
-	static const std::string ALGORITHM;
 
 	bool initialized = false;
 
@@ -16,7 +15,7 @@ private:
 	KCFTracker tracker;
 
 	cv::Mat frame, image;
-	cv::Rect boundingBox;
+	cv::Rect2f boundingBox;
 
 	cv::Rect featureRegion;
 	int featureWidth;
@@ -42,6 +41,6 @@ public:
 	bool selectFeature();
 	void dropFeature();
 
-	cv::Rect getBoundingBox();
+	cv::Rect2f getBoundingBox();
 	cv::Mat getImage();
 };

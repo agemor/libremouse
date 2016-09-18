@@ -87,7 +87,6 @@ the use of this software, even if advised of the possibility of such damage.
 #include "fhog.hpp"
 #include "labdata.hpp"
 #endif
-
 // Constructor
 KCFTracker::KCFTracker(bool hog, bool fixed_window, bool multiscale, bool lab)
 {
@@ -160,7 +159,11 @@ KCFTracker::KCFTracker(bool hog, bool fixed_window, bool multiscale, bool lab)
 // Initialize tracker 
 void KCFTracker::init(const cv::Rect &roi, cv::Mat image)
 {
-    _roi = roi;
+	_roi = cv::Rect2f();
+	_roi.x = roi.x;
+	_roi.y = roi.y;
+	_roi.width = roi.width;
+	_roi.height = roi.height;//roi;
     assert(roi.width >= 0 && roi.height >= 0);
     _tmpl = getFeatures(image, 1);
     _prob = createGaussianPeak(size_patch[0], size_patch[1]);
@@ -170,7 +173,7 @@ void KCFTracker::init(const cv::Rect &roi, cv::Mat image)
     train(_tmpl, 1.0); // train with initial frame
  }
 // Update position based on the new frame
-cv::Rect KCFTracker::update(cv::Mat image)
+cv::Rect2f KCFTracker::update(cv::Mat image)
 {
     if (_roi.x + _roi.width <= 0) _roi.x = -_roi.width + 1;
     if (_roi.y + _roi.height <= 0) _roi.y = -_roi.height + 1;

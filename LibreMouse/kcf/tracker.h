@@ -28,11 +28,10 @@ public:
    virtual  ~Tracker() { }
 
     virtual void init(const cv::Rect &roi, cv::Mat image) = 0;
-    virtual cv::Rect  update( cv::Mat image)=0;
-
+    virtual cv::Rect2f update(cv::Mat image)=0;
 
 protected:
-    cv::Rect_<float> _roi;
+    cv::Rect2f _roi;
 };
 
 

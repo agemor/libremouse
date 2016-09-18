@@ -1,6 +1,5 @@
 #include "VideoProcessor.h"
-
-const std::string VideoProcessor::ALGORITHM = "MEDIANFLOW";
+#include <iostream>
 
 VideoProcessor::VideoProcessor() {
 
@@ -65,10 +64,8 @@ int VideoProcessor::process() {
 
 	// In tracking mode
 	if (featureSelected) {
-
 		boundingBox = tracker.update(frame);
-
-		drawBox(image, boundingBox, 2);
+		drawBox(image, (cv::Rect) boundingBox, 2);
 	}
 
 	else {
@@ -109,7 +106,7 @@ int VideoProcessor::getFeatureHeight() {
 	return featureHeight;
 }
 
-cv::Rect VideoProcessor::getBoundingBox() {
+cv::Rect2f VideoProcessor::getBoundingBox() {
 	return boundingBox;
 }
 

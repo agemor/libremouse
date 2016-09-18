@@ -5,9 +5,9 @@ CursorUpdater::CursorUpdater(wxFrame* _frame) {
 }
 
 void CursorUpdater::update() {
-
+	
 	Point2D target(0, 0);
-	Point2D current(0, 0);
+	Point2I current(0, 0);
 
 	bool moving = false;
 
@@ -60,6 +60,11 @@ void CursorUpdater::update() {
 
 void CursorUpdater::addToPath(Point2D step) {
 
+	if (prevX == 0 && prevY == 0 && step.x > 10) {
+		prevX = step.x;
+		prevY = step.y;
+	}
+
 	prevSpeedX = speedX;
 	prevSpeedY = speedY;
 	speedX = step.x - prevX;
@@ -70,10 +75,13 @@ void CursorUpdater::addToPath(Point2D step) {
 	accY = (speedY - prevSpeedY)*10;// *220;
 
 	double force = sqrt(accX * accX + accY * accY);
-	std::cout << force << std::endl;
 
+	if (abs(speedX) + abs(speedY) > 0) {
+
+		std::cout << speedX << "/" << speedY << std::endl;
+	}
 	if (force > 35 && force < 5000) {
-		std::cout << force << std::endl;
+		//std::cout << force << std::endl;
 
 		int cursorX, cursorY;
 		wxGetMousePosition(&cursorX, &cursorY);
@@ -89,15 +97,7 @@ void CursorUpdater::addToPath(Point2D step) {
 void CursorUpdater::start() {
 	if (!running) {
 
-		// Init cursor prev pos
-		int cursorX, cursorY;
-		wxGetMousePosition(&cursorX, &cursorY);
-
-		//mouseState.GetPosition(&cursorX, &cursorY);
-
-		prevX = cursorX;
-		prevY = cursorY;
-
+		std::cout << prevX << "/" << prevY << std::endl;
 		running = true;
 		updater = std::thread([this] { this->update(); });
 	}
