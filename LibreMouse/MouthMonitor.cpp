@@ -7,23 +7,50 @@ void showHistogram(cv::Mat& src);
 void showGreyHistogram(cv::Mat& src);
 void showCantour(cv::Mat& src);
 void findCircles(cv::Mat& src);
+cv::Mat colorEqualizeHist(cv::Mat src);
 
 void MouthMonitor::update(cv::Mat& source) {
 
 	cv::Mat dst, dst2;
 
-	cv::cvtColor(source, source, cv::COLOR_BGR2GRAY);
+	dst = colorEqualizeHist(source);
+
+	//cv::cvtColor(source, source, cv::COLOR_BGR2GRAY);
 	//cv::HoughCircles(src_gray, circles, CV_HOUGH_GRADIENT, 1, src_gray.rows / 8, 200, 100, 0, 0);
 
 	/// Apply Histogram Equalization
-	cv::equalizeHist(source, dst);
+	//cv::equalizeHist(source, dst);
 	//cv::normalize(dst, dst, 0, 1., cv::NORM_MINMAX);
 	//cv::threshold(dst, dst, 15, 255, cv::THRESH_BINARY);
-	//cv::imshow("ss", dst);
-	findCircles(dst);
+	cv::imshow("ss", dst);
+	//findCircles(dst);
 	//cv::GaussianBlur(dst, dst2, cv::Size(9, 9), 2.0, 2.0);
 	//showGreyHistogram(dst2);
 	//showCantour(dst);
+}
+
+cv::Mat colorEqualizeHist(cv::Mat src) {
+
+	std::vector<cv::Mat> channels;
+	cv::Mat nsrc, img_hist_equalized, out;
+
+	cv::resize(src, nsrc, cv::Size(400, 400));
+
+	cvtColor(nsrc, img_hist_equalized, CV_BGR2YCrCb); //change the color image from BGR to YCrCb format
+	cv::split(img_hist_equalized, channels); //split the image into channels
+	cv::equalizeHist(channels[0], channels[0]); //equalize histogram on the 1st channel (Y)
+
+	cv::merge(channels, img_hist_equalized); //merge 3 channels including the modified 1st channel into one image
+	//std::cout << channels.size() << std::endl;
+
+
+	cv::inRange(img_hist_equalized, cv::Scalar(250, 0, 0), cv::Scalar(255, 140, 255), out);
+
+	int count = cv::countNonZero(out);
+	if(count > 1000)
+	std::cout << count << std::endl;
+
+	return out;
 }
 
 void findCircles(cv::Mat& src) {
@@ -55,7 +82,7 @@ void findCircles(cv::Mat& src) {
 }
 
 cv::RNG rng(12345);
-int thresh = 200;
+int thresh = 230;
 int max_thresh = 255;
 void showCantour(cv::Mat& src) {
 	cv::Mat canny_output;

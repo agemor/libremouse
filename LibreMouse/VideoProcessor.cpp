@@ -17,8 +17,8 @@ int VideoProcessor::initialize() {
 
 	tracker = KCFTracker(HOG, FIXEDWINDOW, MULTISCALE, LAB);
 
-	setFeatureWidth(100);
-	setFeatureHeight(100);
+	setFeatureWidth(60);
+	setFeatureHeight(80);
 
 	initialized = true;
 
