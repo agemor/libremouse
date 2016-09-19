@@ -6,21 +6,54 @@ MouthMonitor::MouthMonitor(){
 void showHistogram(cv::Mat& src);
 void showGreyHistogram(cv::Mat& src);
 void showCantour(cv::Mat& src);
+void findCircles(cv::Mat& src);
+
 void MouthMonitor::update(cv::Mat& source) {
 
 	cv::Mat dst, dst2;
 
 	cv::cvtColor(source, source, cv::COLOR_BGR2GRAY);
+	//cv::HoughCircles(src_gray, circles, CV_HOUGH_GRADIENT, 1, src_gray.rows / 8, 200, 100, 0, 0);
 
 	/// Apply Histogram Equalization
 	cv::equalizeHist(source, dst);
 	//cv::normalize(dst, dst, 0, 1., cv::NORM_MINMAX);
 	//cv::threshold(dst, dst, 15, 255, cv::THRESH_BINARY);
 	//cv::imshow("ss", dst);
-	cv::GaussianBlur(dst, dst2, cv::Size(9, 9), 2.0, 2.0);
-	showGreyHistogram(dst2);
+	findCircles(dst);
+	//cv::GaussianBlur(dst, dst2, cv::Size(9, 9), 2.0, 2.0);
+	//showGreyHistogram(dst2);
 	//showCantour(dst);
 }
+
+void findCircles(cv::Mat& src) {
+	/// Reduce the noise so we avoid false circle detection
+	//cv::GaussianBlur(src, src, cv::Size(9, 9), 2, 2);
+
+	std::vector<cv::Vec3f> circles;
+
+	/// Apply the Hough Transform to find the circles
+	cv::HoughCircles(src, circles, CV_HOUGH_GRADIENT, 1, src.rows / 1, 80, 60,  8, 400);
+
+	/// Draw the circles detected
+	for (size_t i = 0; i < circles.size(); i++)
+	{
+		cv::Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
+		int radius = cvRound(circles[i][2]);
+		// circle center
+		circle(src, center, 3, cv::Scalar(0, 255, 0), -1, 8, 0);
+		// circle outline
+		circle(src, center, radius, cv::Scalar(0, 0, 255), 3, 8, 0);
+	}
+	
+	if(circles.size() > 0)
+	std::cout << circles.size() << std::endl;
+	/// Show your results
+	//cv::namedWindow("Hough Circle Transform Demo", CV_WINDOW_AUTOSIZE);
+	//cv::imshow("Hough Circle Transform Demo", src);
+	//cvWaitKey(1);
+}
+
 cv::RNG rng(12345);
 int thresh = 200;
 int max_thresh = 255;
