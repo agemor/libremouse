@@ -45,9 +45,22 @@ void LibreMouse::onTimer(wxTimerEvent &event) {
 
 	videoProcessor.process();
 
-	if (videoProcessor.detectMouth() > 0.2f) {
-		std::cout << "click" << std::endl;
+	bool mouthOpen = videoProcessor.detectMouth() > 0.2f;
+
+	// mouse up situation
+	if (mouseDown && !mouthOpen) {
+		mouseDown = false;
+		CursorControl::mouseUp();
+		std::cout << "mouse up" << std::endl;
 	}
+
+	// mouse down situation
+	else if (!mouseDown && mouthOpen) {
+		mouseDown = true;
+		CursorControl::mouseDown();
+		std::cout << "mouse down" << std::endl;
+	}
+
 
 	cv::Rect2d box = videoProcessor.getBoundingBox();
 	cursorUpdater.addToPath(Point2D(box.x, box.y));

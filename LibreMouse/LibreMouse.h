@@ -5,13 +5,16 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-#include "VideoPanel.h";
+#include "VideoPanel.h"
+#include "CursorControl.h"
 
 class LibreMouse : public wxApp {
 private:
 	wxFrame* frame;
 	VideoPanel* videoPanel;
 	wxTimer timer;
+
+	bool mouseDown = false;
 
 	VideoProcessor videoProcessor;
 	CursorUpdater cursorUpdater;
