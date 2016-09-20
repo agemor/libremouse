@@ -19,33 +19,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CursorControl.h" />
-    <ClInclude Include="CursorUpdater.h" />
-    <ClInclude Include="kcf\ffttools.hpp" />
-    <ClInclude Include="kcf\fhog.hpp" />
-    <ClInclude Include="kcf\kcftracker.hpp" />
-    <ClInclude Include="kcf\labdata.hpp" />
-    <ClInclude Include="kcf\recttools.hpp" />
-    <ClInclude Include="kcf\tracker.h" />
-    <ClInclude Include="MouthMonitor.h" />
-    <ClInclude Include="Point2D.h" />
-    <ClInclude Include="SynchronizedQueue.h" />
-    <ClInclude Include="VideoPanel.h" />
-    <ClInclude Include="LibreMouse.h" />
-    <ClInclude Include="VideoProcessor.h" />
-    <ClInclude Include="VideoSource.h" />
+    <ClInclude Include="..\Sources\CursorControl.h" />
+    <ClInclude Include="..\Sources\CursorUpdater.h" />
+    <ClInclude Include="..\Sources\kcf\ffttools.hpp" />
+    <ClInclude Include="..\Sources\kcf\fhog.hpp" />
+    <ClInclude Include="..\Sources\kcf\kcftracker.hpp" />
+    <ClInclude Include="..\Sources\kcf\labdata.hpp" />
+    <ClInclude Include="..\Sources\kcf\recttools.hpp" />
+    <ClInclude Include="..\Sources\kcf\tracker.h" />
+    <ClInclude Include="..\Sources\MouthMonitor.h" />
+    <ClInclude Include="..\Sources\Point2D.h" />
+    <ClInclude Include="..\Sources\SynchronizedQueue.h" />
+    <ClInclude Include="..\Sources\VideoPanel.h" />
+    <ClInclude Include="..\Sources\LibreMouse.h" />
+    <ClInclude Include="..\Sources\VideoProcessor.h" />
+    <ClInclude Include="..\Sources\VideoSource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CursorControl.cpp" />
-    <ClCompile Include="CursorUpdater.cpp" />
-    <ClCompile Include="kcf\fhog.cpp" />
-    <ClCompile Include="kcf\kcftracker.cpp" />
-    <ClCompile Include="MouthMonitor.cpp" />
-    <ClCompile Include="Point2D.cpp" />
-    <ClCompile Include="VideoPanel.cpp" />
-    <ClCompile Include="LibreMouse.cpp" />
-    <ClCompile Include="VideoProcessor.cpp" />
-    <ClCompile Include="VideoSource.cpp" />
+    <ClCompile Include="..\Sources\CursorControl.cpp" />
+    <ClCompile Include="..\Sources\CursorUpdater.cpp" />
+    <ClCompile Include="..\Sources\kcf\fhog.cpp" />
+    <ClCompile Include="..\Sources\kcf\kcftracker.cpp" />
+    <ClCompile Include="..\Sources\MouthMonitor.cpp" />
+    <ClCompile Include="..\Sources\Point2D.cpp" />
+    <ClCompile Include="..\Sources\VideoPanel.cpp" />
+    <ClCompile Include="..\Sources\LibreMouse.cpp" />
+    <ClCompile Include="..\Sources\VideoProcessor.cpp" />
+    <ClCompile Include="..\Sources\VideoSource.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FB7BE275-A398-4AB1-83B1-E590DF92E2A1}</ProjectGuid>
@@ -119,7 +119,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Libraries\TBB-2017\include;D:\Libraries\wxWidgets-3.1.0\lib\vc_dll\mswu;D:\Libraries\wxWidgets-3.1.0\include;D:\Libraries\OpenCV-3.1\min-build\install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Sources;D:\Libraries\TBB-2017\include;D:\Libraries\wxWidgets-3.1.0\lib\vc_dll\mswu;D:\Libraries\wxWidgets-3.1.0\include;D:\Libraries\OpenCV-3.1\min-build\install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>__WXMSW__;WXUSINGDLL;wxUSE_GUI=1;_CRT_SECURE_NO_WARNINGS;HAVE_TBB=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
