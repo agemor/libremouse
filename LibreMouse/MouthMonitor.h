@@ -4,6 +4,8 @@
 #include <opencv2/highgui/highgui.hpp>
 
 class MouthMonitor {
+private:
+	float detectTeeth(cv::Mat& src);
 public:
 	MouthMonitor();
 	void update(cv::Mat& source);
