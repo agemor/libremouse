@@ -11,6 +11,10 @@
 class LibreMouse : public wxApp {
 private:
 	wxFrame* frame;
+	
+	wxMenuBar* menuBar;
+	wxMenu* helpMenu;
+
 	VideoPanel* videoPanel;
 	wxTimer timer;
 
