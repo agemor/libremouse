@@ -2,8 +2,18 @@
 
 VideoPanel::VideoPanel(wxFrame* parent) : wxPanel(parent) {}
 
-void VideoPanel::updateFrame(cv::Mat& frame) {
-	wxBitmap image = convertToWxForm(frame);
+void VideoPanel::updateFrame(cv::Mat& frame, int width, int height) {
+
+	wxBitmap image;
+
+	if (frame.cols != width || frame.rows != height) {
+		cv::Mat resized;
+		cv::resize(frame, resized, cv::Size(width, height));
+		image = convertToWxForm(resized);
+	}
+	else {
+		image = convertToWxForm(frame);
+	}
 
 	wxClientDC dc(this);
 	dc.DrawBitmap(image, 0, 0, false);

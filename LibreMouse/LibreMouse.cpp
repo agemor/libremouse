@@ -12,16 +12,17 @@ LibreMouse::LibreMouse() : timer(this, TIMER_ID) { }
 
 bool LibreMouse::OnInit() {
 
-	AllocConsole();
-	freopen("CONOUT$", "w", stdout);
+	//AllocConsole();
+	//freopen("CONOUT$", "w", stdout);
 
 	wxInitAllImageHandlers();
 
 	frame = new wxFrame((wxFrame*)NULL, -1, _T("LibreMouse"));
 	frame->CreateStatusBar();
-	frame->SetStatusText(_T("Not tracking"));
 	frame->Show(true);
 	frame->SetSize(wxRect(0, 0, 640, 480), 2);
+	frame->SetWindowStyle(wxDEFAULT_FRAME_STYLE ^ wxMAXIMIZE_BOX ^ wxMINIMIZE_BOX);
+
 	SetTopWindow(frame);
 	
 	videoPanel = new VideoPanel(frame);
@@ -36,11 +37,19 @@ void LibreMouse::onTimer(wxTimerEvent &event) {
 	if (!videoProcessor.isInitialized())
 		return;
 
+	std::string statusText = "";
+
 	if (videoProcessor.featureSelected) {
 		cursorUpdater.start();
+		statusText = "Tracking... Press spacebar to stop.";
 	}
 	else {
 		cursorUpdater.stop();
+		statusText = "Press spacebar to start tracking.";
+	}
+
+	if (mouseDown) {
+		statusText = "Mouse down";
 	}
 
 	videoProcessor.process();
@@ -51,29 +60,33 @@ void LibreMouse::onTimer(wxTimerEvent &event) {
 	if (mouseDown && !mouthOpen) {
 		mouseDown = false;
 		CursorControl::mouseUp();
-		std::cout << "mouse up" << std::endl;
 	}
 
 	// mouse down situation
 	else if (!mouseDown && mouthOpen) {
 		mouseDown = true;
 		CursorControl::mouseDown();
-		std::cout << "mouse down" << std::endl;
 	}
-
-
+	
 	cv::Rect2d box = videoProcessor.getBoundingBox();
 	cursorUpdater.addToPath(Point2D(box.x, box.y));
 
-	videoPanel->updateFrame(videoProcessor.getFrame());
+	int windowWidth, windowHeight;
+	frame->GetClientSize(&windowWidth, &windowHeight);
+	videoPanel->updateFrame(videoProcessor.getFrame(), windowWidth, windowHeight);
+
+	frame->SetStatusText(statusText);
 }
 
 int LibreMouse::FilterEvent(wxEvent& event) {
 	if ((event.GetEventType() == wxEVT_KEY_DOWN) &&
 		(((wxKeyEvent&)event).GetKeyCode() == WXK_SPACE)) {
-		
-		videoProcessor.selectFeature();
-
+		if (videoProcessor.featureSelected) {
+			videoProcessor.dropFeature();
+		}
+		else {
+			videoProcessor.selectFeature();
+		}
 		return true;
 	}
 

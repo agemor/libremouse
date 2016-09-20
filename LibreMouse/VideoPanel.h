@@ -11,5 +11,5 @@ private:
 
 public:
 	VideoPanel(wxFrame* parent);
-	void updateFrame(cv::Mat& frame);
+	void updateFrame(cv::Mat& frame, int width, int height);
 };
