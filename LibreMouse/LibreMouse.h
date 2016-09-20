@@ -7,17 +7,25 @@
 
 #include "VideoPanel.h";
 
-class LibreMouse : public wxApp
-{
+class LibreMouse : public wxApp {
 private:
-	wxFrame *frame;
-	VideoPanel *videoPanel;
+	wxFrame* frame;
+	VideoPanel* videoPanel;
+	wxTimer timer;
 
-	VideoProcessor *videoProcessor;
+	VideoProcessor videoProcessor;
+	CursorUpdater cursorUpdater;
+	MouthMonitor mouthMonitor;
+
+	DECLARE_EVENT_TABLE()
 
 public:
+	LibreMouse();
 	virtual bool OnInit();
 	virtual int FilterEvent(wxEvent& event);
+
+	void onTimer(wxTimerEvent &event);
+
 };
 
 DECLARE_APP(LibreMouse);

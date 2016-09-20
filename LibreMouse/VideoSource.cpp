@@ -1,9 +1,7 @@
 #include "VideoSource.h"
 
 
-VideoSource::VideoSource()
-{
-}
+VideoSource::VideoSource() {}
 
 /**
  * Detect possible camera port and open it.

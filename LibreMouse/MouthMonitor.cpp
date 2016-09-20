@@ -1,18 +1,8 @@
 #include "MouthMonitor.h"
-#include <iostream>
 
-MouthMonitor::MouthMonitor(){
-}
-void MouthMonitor::update(cv::Mat& source) {
+MouthMonitor::MouthMonitor() {}
 
-	float percentage =  detectTeeth(source);
-
-	if(percentage > 0.2f)
-	std::cout << percentage << std::endl;
-
-}
-
-float MouthMonitor::detectTeeth(cv::Mat& src) {
+float MouthMonitor::detect(cv::Mat& src) {
 
 	// Normalize size
 	cv::Mat normalized;

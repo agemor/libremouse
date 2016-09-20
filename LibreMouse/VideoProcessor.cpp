@@ -1,7 +1,6 @@
 #include "VideoProcessor.h"
 
-VideoProcessor::VideoProcessor() {
-}
+VideoProcessor::VideoProcessor() {}
 
 int VideoProcessor::initialize() {
 
@@ -75,13 +74,18 @@ int VideoProcessor::process() {
 
 	if (featureSelected) {
 		boundingBox = tracker.update(frame);
-		mouthMonitor.update(frame(boundingBox));
 		drawBox(image, (cv::Rect) boundingBox, 2);
 	}
 	else {
 		drawBox(image, featureRegion, 2);
 	}
 	return 0;
+}
+
+float VideoProcessor::detectMouth() {
+	if (frame.empty() || !featureSelected)
+		return 0;
+	return mouthMonitor.detect(frame(boundingBox));
 }
 
 bool VideoProcessor::selectFeature() {
@@ -119,6 +123,6 @@ cv::Rect2f VideoProcessor::getBoundingBox() {
 	return boundingBox;
 }
 
-cv::Mat VideoProcessor::getImage() {
+cv::Mat VideoProcessor::getFrame() {
 	return image;
 }

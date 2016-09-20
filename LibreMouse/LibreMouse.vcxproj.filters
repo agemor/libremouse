@@ -57,6 +57,12 @@
     <ClInclude Include="MouthMonitor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CursorControl.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Point2D.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibreMouse.cpp">
@@ -81,6 +87,12 @@
       <Filter>소스 파일\kcf</Filter>
     </ClCompile>
     <ClCompile Include="MouthMonitor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CursorControl.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Point2D.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

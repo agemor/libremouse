@@ -34,6 +34,7 @@ public:
 	bool isInitialized();
 
 	int process();
+	float detectMouth();
 
 	void setFeatureWidth(int width);
 	void setFeatureHeight(int height);
@@ -44,5 +45,5 @@ public:
 	void dropFeature();
 
 	cv::Rect2f getBoundingBox();
-	cv::Mat getImage();
+	cv::Mat getFrame();
 };

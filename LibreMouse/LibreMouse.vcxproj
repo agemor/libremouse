@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CursorControl.h" />
     <ClInclude Include="CursorUpdater.h" />
     <ClInclude Include="kcf\ffttools.hpp" />
     <ClInclude Include="kcf\fhog.hpp" />
@@ -27,6 +28,7 @@
     <ClInclude Include="kcf\recttools.hpp" />
     <ClInclude Include="kcf\tracker.h" />
     <ClInclude Include="MouthMonitor.h" />
+    <ClInclude Include="Point2D.h" />
     <ClInclude Include="SynchronizedQueue.h" />
     <ClInclude Include="VideoPanel.h" />
     <ClInclude Include="LibreMouse.h" />
@@ -34,10 +36,12 @@
     <ClInclude Include="VideoSource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CursorControl.cpp" />
     <ClCompile Include="CursorUpdater.cpp" />
     <ClCompile Include="kcf\fhog.cpp" />
     <ClCompile Include="kcf\kcftracker.cpp" />
     <ClCompile Include="MouthMonitor.cpp" />
+    <ClCompile Include="Point2D.cpp" />
     <ClCompile Include="VideoPanel.cpp" />
     <ClCompile Include="LibreMouse.cpp" />
     <ClCompile Include="VideoProcessor.cpp" />

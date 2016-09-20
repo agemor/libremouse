@@ -1,26 +1,6 @@
 #include "CursorUpdater.h"
-#include <iostream>
-#include <windows.h>
 
-
-double min(double a, double b) {
-	return (a < b ? a : b);
-}
-
-CursorUpdater::CursorUpdater(wxFrame* _frame) {
-	frame = _frame;
-}
-
-void CursorUpdater::getCursorPosition(Point2D &point) {
-	int cursorX, cursorY;
-	wxGetMousePosition(&cursorX, &cursorY);
-	point.x = cursorX;
-	point.y = cursorY;
-}
-
-void CursorUpdater::setCursorPosition(Point2D &point) {
-	SetCursorPos(point.x, point.y);
-}
+CursorUpdater::CursorUpdater() {}
 
 void CursorUpdater::update() {
 
@@ -42,7 +22,7 @@ void CursorUpdater::update() {
 			if (distance >= prevDistance || distance < 1) {
 				if (pathQueue.size() > 0) {
 					target = pathQueue.pop();
-					getCursorPosition(current);
+					CursorControl::getCursorPosition(current);
 					distance = INFINITY;
 				}
 				else {
@@ -52,14 +32,14 @@ void CursorUpdater::update() {
 			else {
 				current.x += 0.28f * (target.x - current.x);
 				current.y += 0.28f * (target.y - current.y);
-				setCursorPosition(current);
+				CursorControl::setCursorPosition(current);
 			}
 		}
 		else {
 			if (pathQueue.size() > 0) {
 				// update target and current
 				target = pathQueue.pop();
-				getCursorPosition(current);
+				CursorControl::getCursorPosition(current);
 				distance = INFINITY;
 				moving = true;
 
@@ -86,13 +66,13 @@ void CursorUpdater::addToPath(Point2D step) {
 	float sy = (prevSpeedY + speedY) / 2;
 
 	sx = 300 * tanh(pow(sx / 1.5, 2) / 30) * (sx > 0 ? 1 : -1);
-	sy = 300 * tanh(pow(sy / 1.5, 2) / 18) * (sy > 0 ? 1 : -1);
+	sy = 400 * tanh(pow(sy / 1.5, 2) / 18) * (sy > 0 ? 1 : -1);
 
 	double force = abs(sx) + abs(sy);
 	if (force > 0) {
 
 		Point2D cursorPosition = Point2D();
-		getCursorPosition(cursorPosition);
+		CursorControl::getCursorPosition(cursorPosition);
 
 		cursorPosition.x += sx;
 		cursorPosition.y += sy;

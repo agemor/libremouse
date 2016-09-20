@@ -5,9 +5,8 @@
 
 class MouthMonitor {
 private:
-	float detectTeeth(cv::Mat& src);
 public:
 	MouthMonitor();
-	void update(cv::Mat& source);
+	float detect(cv::Mat& src);
 };
 

@@ -1,7 +1,14 @@
 #include "LibreMouse.h"
 #include <windows.h>
 
-IMPLEMENT_APP(LibreMouse);
+#define TIMER_ID 100
+
+IMPLEMENT_APP(LibreMouse)
+BEGIN_EVENT_TABLE(LibreMouse, wxApp)
+	EVT_TIMER(TIMER_ID, LibreMouse::onTimer)
+END_EVENT_TABLE()
+
+LibreMouse::LibreMouse() : timer(this, TIMER_ID) { }
 
 bool LibreMouse::OnInit() {
 
@@ -16,28 +23,43 @@ bool LibreMouse::OnInit() {
 	frame->Show(true);
 	frame->SetSize(wxRect(0, 0, 640, 480), 2);
 	SetTopWindow(frame);
+	
+	videoPanel = new VideoPanel(frame);
 
-	videoProcessor = new VideoProcessor();
-	if (videoProcessor->initialize() != 0) {
-		wxMessageBox(wxT("Hello World!"));
+	videoProcessor.initialize();
+	timer.Start(1000 / 36);
+	return true;
+}
 
-		return true;
+void LibreMouse::onTimer(wxTimerEvent &event) {
+
+	if (!videoProcessor.isInitialized())
+		return;
+
+	if (videoProcessor.featureSelected) {
+		cursorUpdater.start();
+	}
+	else {
+		cursorUpdater.stop();
 	}
 
-	videoPanel = new VideoPanel(frame);
-	videoPanel->setVideo(videoProcessor);
+	videoProcessor.process();
 
-	//std::cout << &(videoPanel->getVideo()).kuru << std::endl;
-	//std::cout << &videoProcessor.kuru << std::endl;
+	if (videoProcessor.detectMouth() > 0.2f) {
+		std::cout << "click" << std::endl;
+	}
 
-	return true;
+	cv::Rect2d box = videoProcessor.getBoundingBox();
+	cursorUpdater.addToPath(Point2D(box.x, box.y));
+
+	videoPanel->updateFrame(videoProcessor.getFrame());
 }
 
 int LibreMouse::FilterEvent(wxEvent& event) {
 	if ((event.GetEventType() == wxEVT_KEY_DOWN) &&
 		(((wxKeyEvent&)event).GetKeyCode() == WXK_SPACE)) {
 		
-		videoProcessor->selectFeature();
+		videoProcessor.selectFeature();
 
 		return true;
 	}
