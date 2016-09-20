@@ -34,6 +34,7 @@
     <ClInclude Include="..\Sources\LibreMouse.h" />
     <ClInclude Include="..\Sources\VideoProcessor.h" />
     <ClInclude Include="..\Sources\VideoSource.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Sources\CursorControl.cpp" />
@@ -46,6 +47,9 @@
     <ClCompile Include="..\Sources\LibreMouse.cpp" />
     <ClCompile Include="..\Sources\VideoProcessor.cpp" />
     <ClCompile Include="..\Sources\VideoSource.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="LibreMouse.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FB7BE275-A398-4AB1-83B1-E590DF92E2A1}</ProjectGuid>
@@ -65,6 +69,7 @@
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>

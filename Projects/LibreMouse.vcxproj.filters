@@ -18,82 +18,90 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LibreMouse.h">
+    <ClInclude Include="..\Sources\CursorControl.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="VideoPanel.h">
+    <ClInclude Include="..\Sources\CursorUpdater.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="VideoSource.h">
+    <ClInclude Include="..\Sources\kcf\ffttools.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="VideoProcessor.h">
+    <ClInclude Include="..\Sources\kcf\fhog.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CursorUpdater.h">
+    <ClInclude Include="..\Sources\kcf\kcftracker.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="kcf\ffttools.hpp">
-      <Filter>소스 파일\kcf</Filter>
-    </ClInclude>
-    <ClInclude Include="kcf\fhog.hpp">
-      <Filter>소스 파일\kcf</Filter>
-    </ClInclude>
-    <ClInclude Include="kcf\kcftracker.hpp">
-      <Filter>소스 파일\kcf</Filter>
-    </ClInclude>
-    <ClInclude Include="kcf\labdata.hpp">
-      <Filter>소스 파일\kcf</Filter>
-    </ClInclude>
-    <ClInclude Include="kcf\recttools.hpp">
-      <Filter>소스 파일\kcf</Filter>
-    </ClInclude>
-    <ClInclude Include="kcf\tracker.h">
-      <Filter>소스 파일\kcf</Filter>
-    </ClInclude>
-    <ClInclude Include="SynchronizedQueue.h">
+    <ClInclude Include="..\Sources\kcf\labdata.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MouthMonitor.h">
+    <ClInclude Include="..\Sources\kcf\recttools.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CursorControl.h">
+    <ClInclude Include="..\Sources\kcf\tracker.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Point2D.h">
+    <ClInclude Include="..\Sources\MouthMonitor.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Point2D.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\SynchronizedQueue.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\VideoPanel.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\LibreMouse.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\VideoProcessor.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\VideoSource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LibreMouse.cpp">
+    <ClCompile Include="..\Sources\CursorControl.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="VideoPanel.cpp">
+    <ClCompile Include="..\Sources\CursorUpdater.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="VideoSource.cpp">
+    <ClCompile Include="..\Sources\kcf\fhog.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="VideoProcessor.cpp">
+    <ClCompile Include="..\Sources\kcf\kcftracker.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CursorUpdater.cpp">
+    <ClCompile Include="..\Sources\MouthMonitor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="kcf\fhog.cpp">
-      <Filter>소스 파일\kcf</Filter>
-    </ClCompile>
-    <ClCompile Include="kcf\kcftracker.cpp">
-      <Filter>소스 파일\kcf</Filter>
-    </ClCompile>
-    <ClCompile Include="MouthMonitor.cpp">
+    <ClCompile Include="..\Sources\Point2D.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CursorControl.cpp">
+    <ClCompile Include="..\Sources\VideoPanel.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Point2D.cpp">
+    <ClCompile Include="..\Sources\LibreMouse.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="..\Sources\VideoProcessor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\VideoSource.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="LibreMouse.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
